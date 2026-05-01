@@ -7,7 +7,7 @@ for GNU Octave. To use it the
 installed.
 
 <div style="text-align: center;">
-    <img src="nyqlog_octave_version_dark.png" width="100%">
+    <img src="nyqlog_octave_light.png" width="100%">
     <p align="center"><em>Nyquist plot with logarithmic amplitudes</em></p>
 </div>
 
@@ -31,3 +31,16 @@ Transfer function 'sys' from input 'u1' to output ...
 Continuous-time model.
 octave:3> nyqlog(sys)
 ```
+
+## Bonus: dark theme
+
+This ported version of the function takes the colors from the variables defined
+and used by Octave to render the figures: `defaultFigureColor` and
+`defaultAxesXColor`. If you have customized these variables in Octave's
+configuration file, the function will automatically use those colors as well.
+
+<div style="text-align: center;">
+    <img src="nyqlog_octave_dark.png" width="100%">
+    <p align="center"><em>Nyquist plot with logarithmic amplitudes. Custom figure colors.</em></p>
+</div>
+
