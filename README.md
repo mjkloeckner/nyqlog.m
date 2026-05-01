@@ -20,7 +20,7 @@ Place the file `nyqlog.m` in Octave's path. See
 Then load the control package [^2] and define a transfer function. Finally call
 the `nyqlog` function passing as argument the transfer function.
 
-```shell
+```text
 octave:1> pkg load control
 octave:2> sys = zpk([-1/3 -1/2], [0 -0.02 -0.1 -2 -10], 48)
 
