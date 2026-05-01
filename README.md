@@ -1,12 +1,10 @@
 # Nyquist plot with logarithmic amplitudes
 
-This is a port of Trond Andresen's MATLAB version[^1] for GNU Octave. To use it
-the control package[^2] need to be installed.
-
-[^1]: Trond Andresen (2026). Nyquist plot with logarithmic amplitudes
-    [https://www.mathworks.com/matlabcentral/fileexchange/7444-nyquist-plot-with-logarithmic-amplitudes](https://www.mathworks.com/matlabcentral/fileexchange/7444-nyquist-plot-with-logarithmic-amplitudes), MATLAB Central File Exchange. Retrieved May 1, 2026. 
-
-[^2]: GNU Octave - The 'control' package. [https://gnu-octave.github.io/packages/control/](https://gnu-octave.github.io/packages/control/)
+This is a port of [Trond Andresen's MATLAB
+version](https://www.mathworks.com/matlabcentral/fileexchange/7444-nyquist-plot-with-logarithmic-amplitudes)
+for GNU Octave. To use it the
+[control](https://gnu-octave.github.io/packages/control/) package needs to be
+installed.
 
 <div style="text-align: center;">
     <img src="nyqlog_octave_version_dark.png" width="100%">
@@ -15,10 +13,10 @@ the control package[^2] need to be installed.
 
 ## Quick start
 
-Place the file `nyqlog.m` in Octave's path. See
-[https://docs.octave.org/v11.1.0/Manipulating-the-Load-Path.html](https://docs.octave.org/v11.1.0/Manipulating-the-Load-Path.html).
-Then load the control package [^2] and define a transfer function. Finally call
-the `nyqlog` function passing as argument the transfer function.
+Place the file `nyqlog.m` in Octave's path (see [Manipulating the Load
+Path](https://docs.octave.org/v11.1.0/Manipulating-the-Load-Path.html)). Then
+load the control package and define a transfer function. Finally call the
+`nyqlog` function passing as argument the transfer function.
 
 ```text
 octave:1> pkg load control
