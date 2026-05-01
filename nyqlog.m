@@ -260,7 +260,8 @@ spiralfactor = 1/spiralfactor;
 
 s = scurve(s1, R, spiralfactor, Np_origin, Np_imag, impoles);
 [zmain, ncount] = nygraph(sys, s, '-',
-    'Color', get(0,"defaultaxescolororder")(1,:));
+    'LineWidth', 2.0,
+    'Color', [1.0 0.0 0.0]);
 
 fprintf(1,'Number of poles in RHP of open-loop system: %i\n', openloop_rhp_poles);
 
@@ -300,7 +301,7 @@ text(0.8, -0.64,'0 dB','FontSize',16);
 text(1.1924, -0.9575,'+60','FontSize',16);
 
 % Plotting directional arrows:
-for xh = [0.8 0.65 0.45 0.05]
+for xh = [0.65 0.45 0.05]
 % for xh = [0.8 0.15]
     nmid=round(xh*ncount);
     % arrow(zmain(nmid+1), zmain(nmid),'-');
@@ -311,7 +312,7 @@ for xh = [0.8 0.65 0.45 0.05]
 end
 
 % for xh = [0.75 0.6 0.4 0.2]
-for xh = [0.45 0.90 0.065]
+for xh = [0.03 0.45 0.90]
 % for xh = [0.7 0.1]
     nmid = round(xh*ncount);
     % arrow(zmirr(nmid), zmirr(nmid+1),'-');
@@ -346,19 +347,19 @@ endfunction
 function arrow(z2, z1, varargin)
 
 % dz=0.12*exp(j*angle(z2-z1));
-dz = 0.065*exp(j*angle(z2-z1));
+dz = 0.10*exp(j*angle(z2-z1));
 z_arrow_end1 = z2 - dz*exp(j*pi/4);
 z_arrow_end2 = z2 - dz*exp(-j*pi/4);
 plot([real(z2) real(z_arrow_end1)],
      [imag(z2) imag(z_arrow_end1)],
-     'LineWidth', 2.0,
+     'LineWidth', 1.5,
      'Color', [1.0 0.0 0.0],
      varargin{:});
 
 plot([real(z2) real(z_arrow_end2)],...
      [imag(z2) imag(z_arrow_end2)],
-     'LineWidth', 2.0,
-     'Color', [1.0000 0 0],
+     'LineWidth', 1.5,
+     'Color', [1.0 0.0 0.0],
      varargin{:});
 
 endfunction
