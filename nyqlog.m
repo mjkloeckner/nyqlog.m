@@ -219,14 +219,13 @@ end
 % Plot real and imaginary axes
 plot([-1.5 1.5], [0 0], 
     'Color', [0.53 0.53 0.53],
-    'LineWidth', 2.0);
+    'LineWidth', 1.0);
 
 hold on;
 
 plot([0 0], [-1.5 1.5],
     'Color', [0.53 0.53 0.53],
-    'LineWidth', 2.0);
-
+    'LineWidth', 1.0);
 
 % Plotting background diagram
 circle(0,0.5,'-');
@@ -255,7 +254,7 @@ s = conj(s);
 [zmirr, ncount] = nygraph(sys, s, 
     '--',
     'LineWidth', 2.0,
-    'Color', [0.55 0.55 0.55]);
+    'Color', get(0, "defaultAxesXColor"));
 
 spiralfactor = 1/spiralfactor;
 
@@ -301,16 +300,25 @@ text(0.8, -0.64,'0 dB','FontSize',16);
 text(1.1924, -0.9575,'+60','FontSize',16);
 
 % Plotting directional arrows:
-% for xh = [0.8 0.65 0.45 0.25]
-for xh = [0.8 0.15]
+for xh = [0.8 0.65 0.45 0.05]
+% for xh = [0.8 0.15]
     nmid=round(xh*ncount);
-    arrow(zmain(nmid+1), zmain(nmid),'-');
+    % arrow(zmain(nmid+1), zmain(nmid),'-');
+    arrow(zmain(nmid+1), zmain(nmid),
+          '-',
+          'LineWidth', 2.5,
+          'Color', [1.0 0.0 0.0]);
 end
 
 % for xh = [0.75 0.6 0.4 0.2]
-for xh = [0.7 0.1]
-    nmid=round(xh*ncount);
-    arrow(zmirr(nmid), zmirr(nmid+1),'-');
+for xh = [0.45 0.90 0.065]
+% for xh = [0.7 0.1]
+    nmid = round(xh*ncount);
+    % arrow(zmirr(nmid), zmirr(nmid+1),'-');
+    arrow(zmirr(nmid), zmirr(nmid + 1),
+          '-',
+          'LineWidth', 2.5,
+          'Color', get(0, "defaultAxesXColor"));
 end
 
 % % Contours for |N|= const. may be plotted: 
@@ -335,21 +343,23 @@ endfunction
 %*            SUB-FUNCTIONS               *
 %******************************************
 
-function arrow(z2,z1,col)
+function arrow(z2, z1, varargin)
 
 % dz=0.12*exp(j*angle(z2-z1));
-dz=0.12*exp(j*angle(z2-z1));
-z_arrow_end1=z2-dz*exp(j*pi/4);
-z_arrow_end2=z2-dz*exp(-j*pi/4);
-plot([real(z2) real(z_arrow_end1)],...
-   [imag(z2) imag(z_arrow_end1)],col,
-   'LineWidth', 2.0,
-   'Color', [1.0000 0.4980 0.0549]);
+dz = 0.065*exp(j*angle(z2-z1));
+z_arrow_end1 = z2 - dz*exp(j*pi/4);
+z_arrow_end2 = z2 - dz*exp(-j*pi/4);
+plot([real(z2) real(z_arrow_end1)],
+     [imag(z2) imag(z_arrow_end1)],
+     'LineWidth', 2.0,
+     'Color', [1.0 0.0 0.0],
+     varargin{:});
 
 plot([real(z2) real(z_arrow_end2)],...
-   [imag(z2) imag(z_arrow_end2)],col,
-   'LineWidth', 2.0,
-   'Color', [1.0000 0.4980 0.0549]);
+     [imag(z2) imag(z_arrow_end2)],
+     'LineWidth', 2.0,
+     'Color', [1.0000 0 0],
+     varargin{:});
 
 endfunction
 
@@ -455,7 +465,7 @@ for k = 1 : kmax
     zh(k)=evalfr(sys, s(k));
 end
 
-z=zh.';
+z = zh.';
 absz = abs(z) + 1e-14;
 logabs = 20.*log10(absz);
 
@@ -469,13 +479,13 @@ end
 
 ncount = length(logabs);
 while (logabs(ncount) <= -120) 
-    ncount = ncount-1;
+    ncount = ncount - 1;
 end
 % From now on all vectors are ncount long; ncount <= size(s).
 
 % Plotting the two conjugate halves of the polar curve;
-logabsplot = logabs(1:ncount)./120.+1;
-zplot = z(1:ncount).*logabsplot./absz(1:ncount);
+logabsplot = logabs(1:ncount) ./ 120.+1;
+zplot = z(1:ncount) .* logabsplot ./ absz(1 : ncount);
 
 % plot(zplot, 'LineWidth', 2.2);
 plot(zplot, varargin{:});
