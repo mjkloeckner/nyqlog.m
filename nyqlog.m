@@ -29,32 +29,32 @@ function nyqlog(sys)
 % System examples for copying and pasting on the
 % command line:
 % -------------------
-%sys=tf(1, conv([1 0 0], [1 1]));
-%sys=tf(conv([5 1],[1 1]), [1 0 0 0],'ioDelay',1);
-%sys=tf(1,conv([1 -0.01 0 1 3 -0.1 7],[1 -0.05 0.6]));
-%sys=tf(1,[1 0.00000001 1+0.00000001^2]);
-%sys=tf(1,[1 0]);
-%w0=10; zeta=0.1; sys=tf([1 1],[1/w0^2 2*zeta/w0 1]);
-%w0=5; zeta=0.1; sys=tf(1,[1/w0^2 2*zeta/w0 1]);
-%sys=0.1*tf([10 1], [5 6 1 0 0]);
-%sys=1*tf([1],conv([1 -0.1],[1 0]));
-%sys=tf([1 0 25],conv([1 0 1 0 0],[1 0 4]));
-%sys=tf([1 0 25],[1 0 1 ]);
-%sys=tf([1 0 1], [1 0 0 0]);
-%sys = zpk([-1/3 -1/2], [0 -0.02 -0.1 -2 -10], 48)
+% sys=tf(1, conv([1 0 0], [1 1]));
+% sys=tf(conv([5 1],[1 1]), [1 0 0 0],'ioDelay',1);
+% sys=tf(1,conv([1 -0.01 0 1 3 -0.1 7],[1 -0.05 0.6]));
+% sys=tf(1,[1 0.00000001 1+0.00000001^2]);
+% sys=tf(1,[1 0]);
+% w0=10; zeta=0.1; sys=tf([1 1],[1/w0^2 2*zeta/w0 1]);
+% w0=5; zeta=0.1; sys=tf(1,[1/w0^2 2*zeta/w0 1]);
+% sys=0.1*tf([10 1], [5 6 1 0 0]);
+% sys=1*tf([1],conv([1 -0.1],[1 0]));
+% sys=tf([1 0 25],conv([1 0 1 0 0],[1 0 4]));
+% sys=tf([1 0 25],[1 0 1 ]);
+% sys=tf([1 0 1], [1 0 0 0]);
+% sys = zpk([-1/3 -1/2], [0 -0.02 -0.1 -2 -10], 48)
 
-%Table 9.6 - 3:
-%sys=10*tf(1,conv(conv([1000 1],[10 1]),[1 1]))
-%Table 9.6 - 9:
-%sys=tf(0.001,[50 1 0 0])
-%Table 9.6 - 12:
-% sys=0.05*tf([5 1], [1 0 0 0])
-%Table 9.6 - 13:
-% sys=tf(conv([5 1],[1 1]), [1 0 0 0]);
-%Table 9.6 - 14:
-%sys=200*tf(conv([3 1],[2 1]),conv(conv([50 1 0],[10 1]),conv([0.5 2],[0.1 1])))
-%Table 9.6 - 15:
-%sys=10*tf([25 1],conv([1 2 0 0],[1 1]))
+% Table 9.6 - 3:
+% sys=10*tf(1,conv(conv([1000 1],[10 1]),[1 1]))
+% Table 9.6 - 9:
+% sys=tf(0.001,[50 1 0 0])
+% Table 9.6 - 12:
+%  sys=0.05*tf([5 1], [1 0 0 0])
+% Table 9.6 - 13:
+%  sys=tf(conv([5 1],[1 1]), [1 0 0 0]);
+% Table 9.6 - 14:
+% sys=200*tf(conv([3 1],[2 1]),conv(conv([50 1 0],[10 1]),conv([0.5 2],[0.1 1])))
+% Table 9.6 - 15:
+% sys=10*tf([25 1],conv([1 2 0 0],[1 1]))
 
 % Ex. 8.15 in REGULERINGSTEKNIKK (in Norwegian) by Balchen, Andresen, Foss:
 % a=0.2; T =1; Kp= 1; sys=tf(Kp,conv([1 -a],[T 1]));
@@ -254,7 +254,7 @@ s = scurve(s1, R, spiralfactor, Np_origin, Np_imag, impoles);
 s = conj(s);
 [zmirr, ncount] = nygraph(sys, s, 
     '--',
-    'LineWidth', 2.5,
+    'LineWidth', 2.0,
     'Color', [0.55 0.55 0.55]);
 
 spiralfactor = 1/spiralfactor;
@@ -286,8 +286,14 @@ else
     end
 end
 
+bg_color = get(gcf, "color");   % RGB triplet, values 0..1
+inv_bg_color = 1 - bg_color;          % invert color
+
 % Point (-1, 0)
-plot(-1, 0,'o', 'LineWidth', 2.5, 'Color', [1.0 1.0 1.0]);
+plot(-1, 0, 'o',
+     'markersize', 6,
+     'markeredgecolor', inv_bg_color,
+     'Color', inv_bg_color);
 
 text(0.03,-0.05,'-120','FontSize',16); 
 text(0.4141, -0.3331,'-60','FontSize',16); 
@@ -316,12 +322,12 @@ scalexy = axis; scalexy(3:4) = 1.00*scalexy(3:4);
 axis(scalexy); 
 axis equal; axis off; axis tight; hold off;
 
-h = title("Nyquist plot with logaritmic amplitude");
+% h = title("Nyquist plot with logaritmic amplitude");
 
-set(h, "units", "normalized");
-p = get(h, "position");
-p(2) = p(2) * 1.01;     % default is near 1.0
-set(h, "position", p);
+% set(h, "units", "normalized");
+% p = get(h, "position");
+% p(2) = p(2) * 1.01;     % default is near 1.0
+% set(h, "position", p);
 
 endfunction
 
